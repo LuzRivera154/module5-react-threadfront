@@ -20,7 +20,7 @@ export async function loadSequelize() {
     );
 
     const User = sequelize.define("User", {
-      username: DataTypes.STRING, 
+      username: DataTypes.STRING,
       email: { type: DataTypes.STRING, unique: true },
       password: {
         type: DataTypes.STRING,
@@ -36,18 +36,17 @@ export async function loadSequelize() {
       content: DataTypes.TEXT,
     });
 
-    const Comment = sequelize.define("Comment", {
-      title: DataTypes.TEXT,
+    const Commentaires = sequelize.define("Commentaires", {
       content: DataTypes.TEXT,
     });
 
     // Définition des relations entre les modèles :
     User.hasMany(Post); // Un utilisateur a plusieurs posts
-    User.hasMany(Comment); // Un utilisateur a plusieurs commentaires
-    Post.hasMany(Comment); // Un post a plusieurs commentaires
+    User.hasMany(Commentaires); // Un utilisateur a plusieurs commentaires
+    Post.hasMany(Commentaires); // Un post a plusieurs commentaires
     Post.belongsTo(User); // Un post appartient à un utilisateur
-    Comment.belongsTo(User); // Un commentaire appartient à un utilisateur
-    Comment.belongsTo(Post); // Un commentaire appartient à un post
+    Commentaires.belongsTo(User); // Un commentaire appartient à un utilisateur
+    Commentaires.belongsTo(Post); // Un commentaire appartient à un post
 
     await sequelize.authenticate();
 
@@ -65,6 +64,8 @@ export async function loadSequelize() {
       title: "Faire les courses",
       content: "ananas, savon, éponge",
     });
+
+    
 
     // Retourne l'objet sequelize pour l'utiliser dans d'autres fichiers
     return sequelize;
