@@ -1,0 +1,32 @@
+.icon-footer {
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+}
+.icon-footer:hover{
+    color: rgba(255, 255, 255, 0.726);
+}
+.messenger{
+    font-size: 2rem;
+    color: white;
+}
+
+.footer-profile {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.title-profile {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-left: 5rem;
+
+}
+
+.username-profile {
+    font-size: 2rem;
+    text-align: start;
+    justify-content: flex-start;
+    margin-left: 5rem;
+}
