@@ -9,25 +9,27 @@
   gap: 37px;
 }
 
-textarea {
+.post-content {
   height: 171px;
   border-radius: 9px;
   display: flex;
   flex-wrap: wrap;
-  color: #676767;
+  color: #999;;
   background-color: #0d0d0d;
+  border: none;
 }
 
-h1 {
-    border-left: 4px solid white;
-    color: white;
+.post-title {
+  border-left: 4px solid white;
+  color: white;
+  padding-left: 10px;
 }
 
 .error-message {
   color: red;
 }
 
-button {
+.post-button {
   width: 30%;
   height: 36px;
 } */
