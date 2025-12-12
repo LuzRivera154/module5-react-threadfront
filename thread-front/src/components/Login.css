@@ -1,0 +1,71 @@
+body{
+    background-color: #1b1b1b;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+
+h1{
+    color: aliceblue;
+    border-left: 4px solid white;
+    margin: 90px;
+
+}
+
+
+.login-container{
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ flex-direction: column;
+ 
+}
+
+h2{
+color: aliceblue; 
+text-align: center;   
+}
+
+
+.register-link{
+
+color:grey    
+}
+
+.label{
+display: flex;
+flex-direction: column;
+text-align: center;
+}
+
+.email{
+display: flex;
+flex-direction: column;
+color: aliceblue;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 22px;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  outline: none;
+}
+
+.password{
+color: aliceblue;
+}
+
+p{
+color: aliceblue;
+}
+
+
+
