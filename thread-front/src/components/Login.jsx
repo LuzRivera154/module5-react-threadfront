@@ -26,11 +26,9 @@ export function Login() {
     <div className="login-container">
       <h1 >Connexion</h1>
      
-
       <form onSubmit={handleSubmit} >
         <div >
 
-         
           <input
             type="email"
             id="email"
