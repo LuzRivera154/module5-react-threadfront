@@ -1,4 +1,4 @@
-import Sequelize, { DataTypes } from "sequelize";
+import Sequelize, { DataTypes, ForeignKeyConstraintError } from "sequelize";
 import bcrypt from "bcrypt";
 
 export async function loadSequelize() {
@@ -41,10 +41,10 @@ export async function loadSequelize() {
     });
 
     // Définition des relations entre les modèles :
-    User.hasMany(Post); // Un utilisateur a plusieurs posts
+    User.hasMany(Post, {ForeignKey: "UserId"}); // Un utilisateur a plusieurs posts
     User.hasMany(Commentaires); // Un utilisateur a plusieurs commentaires
     Post.hasMany(Commentaires); // Un post a plusieurs commentaires
-    Post.belongsTo(User); // Un post appartient à un utilisateur
+    Post.belongsTo(User, {ForeignKey: "UserId"}); // Un post appartient à un utilisateur
     Commentaires.belongsTo(User); // Un commentaire appartient à un utilisateur
     Commentaires.belongsTo(Post); // Un commentaire appartient à un post
 

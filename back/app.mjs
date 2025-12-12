@@ -106,8 +106,8 @@ async function main() {
                 );
                 response.cookie('token', token, {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === "production", // En prod, cookie HTTPS uniquement
-                    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+                    secure: false, // En prod, cookie HTTPS uniquement
+                    sameSite: 'lax',
                 });
                 response.json({ message: 'Login succesful' });
 
@@ -191,10 +191,11 @@ async function main() {
             }
         })
 
-        app.get("/users/:userId/posts", async (request, response) => {
+        app.get("/users/:userId/profile", async (request, response) => {
             try {
                 const posts = await Post.findAll({
-                    where: { userId: request.params.userId }
+                    where: { userId: request.params.userId },
+                    include: [User]
                 });
                 if (posts.length === 0) {
                     return response.json({ message: "Aucun post publié pour l’instant" });
