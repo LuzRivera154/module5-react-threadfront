@@ -5,6 +5,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Feed from './components/Feed.jsx'
 import { Register } from './components/Register.jsx'
 
+import { Login } from "./components/Login.jsx";
+
+
+
 function App() {
 
   return (
@@ -14,6 +18,7 @@ function App() {
           <Route path="/" element={<Feed />} />
           <Route path="/register" element={<Register />} />
 
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
