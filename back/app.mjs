@@ -41,7 +41,12 @@ async function main() {
         }
 
         const app = express();
-        app.use(cors());
+        // Changement ICI --------------------------------------------------------------------------
+        app.use(cors({
+            origin: 'http://localhost:5173', // Vérifiez que c'est bien le port de votre React
+            credentials: true // Autorise l'envoi des cookies (token)
+        }));
+        //------------------------------------------------------------------------------------------
         app.use(express.json());
         app.use(cookieParser());
 
