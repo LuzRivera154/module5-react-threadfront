@@ -1,5 +1,5 @@
-body {
-  background-color: #1b1b1b;
+/* body {
+    background-color: #1b1b1b;
 }
 
 .create-post {
@@ -32,25 +32,4 @@ body {
 .post-button {
   width: 30%;
   height: 36px;
-}
-
-.icons-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px 0;
-    display: flex;
-    justify-content: space-around;
-    color:white;
-}
-
-.fa-solid {
-  font-size: 35px;
-  margin-left: 110px;
-}
-
-.fa-regular.fa-message {
-  font-size: 35px;
-  margin-left: 47px;
-}
+} */

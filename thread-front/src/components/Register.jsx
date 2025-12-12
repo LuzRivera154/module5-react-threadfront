@@ -1,91 +1,107 @@
 import { useState } from "react";
-import "./Register.css"
+import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 export function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [verifiedPassword, setVerifiedPassword] = useState("");
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState("");
+    const [isSuccess, setIsSuccess] = useState(false);
 
+    const navigate = useNavigate();
 
-
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        fetch("http://localhost:3000/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, email, password, verifiedPassword })
-        })
-            .then(res => res.json())
-            .then(data => setMessage(data.message))
-            .catch(err => console.error(err));
+        try {
+            const res = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, email, password, verifiedPassword })
+            });
 
+            const data = await res.json();
+            console.log("Réponse backend :", data);
 
-        setMessage(`${username} enregistré avec succès`)
+            setMessage(data.message || "Une erreur est survenue");
 
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setVerifiedPassword("")
+            // redirection
+            if (data.success) {
+                setIsSuccess(true);
 
-        
-    }
-    
+                setUsername("");
+                setEmail("");
+                setPassword("");
+                setVerifiedPassword("");
+
+                // Redirection après 1 seconde
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1000);
+            } else {
+                setIsSuccess(false);
+            }
+
+        } catch (error) {
+            console.error("Erreur fetch :", error);
+            setMessage("Erreur réseau ou serveur indisponible");
+            setIsSuccess(false);
+        }
+    };
 
     return (
         <div className="container-register">
-            <h2>Creation de 
-                compte</h2>
+            <h2 className="create">Création de compte</h2>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="@Pseudo"
-                    />
-                </div>
+            <form className="formulaire" onSubmit={handleSubmit}>
 
-                <br />
+                <input
+                    className="inputP"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="@Pseudo"
+                    required
+                />
 
-                <div>
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email"
-                    />
-                </div>
+                <input
+                    className="inputP"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email"
+                    required
+                />
 
-                <br />
+                <input
+                    className="inputP"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="mot de passe"
+                    required
+                />
 
-                <div>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="mot de passe"
-                    />
-                </div>
+                <input
+                    className="inputP"
+                    type="password"
+                    value={verifiedPassword}
+                    onChange={(e) => setVerifiedPassword(e.target.value)}
+                    placeholder="mot de passe encore"
+                    required
+                />
 
-                <br />
+                <button className="buttonSub" type="submit">
+                    Créer un compte
+                </button>
 
-                <div>
-                    <input
-                        type="password"
-                        value={verifiedPassword}
-                        onChange={(e) => setVerifiedPassword(e.target.value)}
-                        placeholder="mot de passe encore"
-                    />
-                </div>
-                <button type="submit"> Créer un <br /> compte</button>
-                {message && <p>{message}</p>}
+                {message && (
+                    <p className={isSuccess ? "success" : "error"}>{message}</p>
+                )}
 
             </form>
         </div>
-    )
+    );
 }
