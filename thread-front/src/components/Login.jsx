@@ -6,7 +6,8 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email || !password) {
@@ -14,20 +15,37 @@ export function Login() {
       return;
     }
 
-    // Simulation d'une connexion réussie
-    setMessage(`Bienvenue ! Vous êtes connecté.`);
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // <- importante para recibir la cookie HTTP-only
+        body: JSON.stringify({ email, password }),
+      });
 
-    setEmail("");
-    setPassword("");
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage("Bienvenue ! Vous êtes connecté.");
+      } else {
+        setMessage(data.message || "Erreur de connexion");
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("Erreur serveur");
+    }
   };
+
 
   return (
 
     <div className="login-container">
       <h1 >Connexion</h1>
-     
+
+
       <form onSubmit={handleSubmit} >
         <div >
+
 
           <input
             type="email"
@@ -40,7 +58,7 @@ export function Login() {
         </div>
 
         <div >
-          
+
           <input
             type="password"
             id="password"
