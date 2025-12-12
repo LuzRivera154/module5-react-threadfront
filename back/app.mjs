@@ -58,11 +58,17 @@ async function main() {
         // Route POST /register : création d'un utilisateur
         app.post('/register', async (request, response) => {
             try {
-                const { username, email, password, } = request.body;
+                const { username, email, password, verifiedPassword } = request.body;
                 // Validation : vérifier que tous les champs obligatoires sont présents
-                if (!email || !password || !username) {
+                if (!email || !password || !username || !verifiedPassword) {
                     return response.status(400).json({
                         message: "Les champs email, username, password sont requis",
+                    });
+                }
+
+                if (password !== verifiedPassword) {
+                    return response.status(400).json({
+                        message: "Les mots de passe ne correspondent pas",
                     });
                 }
 
