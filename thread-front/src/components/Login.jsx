@@ -24,14 +24,14 @@ export function Login() {
   return (
 
     <div className="login-container">
-      <h1 >Connexion</h1>
+      <h1 className="title">Connexion</h1>
      
 
-      <form onSubmit={handleSubmit} >
+      <form className="form-login"onSubmit={handleSubmit} >
         <div >
 
          
-          <input
+          <input className="contact-mail"
             type="email"
             id="email"
             value={email}
@@ -43,8 +43,8 @@ export function Login() {
 
         <div >
           
-          <input
-            type="password"
+          <input className="mdp"
+            type="thepassword"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -52,13 +52,13 @@ export function Login() {
             required
           />
         </div>
+      </form>
 
-        <button type="submit" >Se connecter</button>
+        <button className="btn" type="submit" >Se connecter</button>
 
-        <p>{message}</p>
+        <p className="conf">{message}</p>
 
         <a href="/register" className="register-link">Se créer un compte</a>
-      </form>
     </div>
   );
 }

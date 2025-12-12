@@ -7,7 +7,7 @@ body{
 }
 
 
-h1{
+.title{
     color: aliceblue;
     border-left: 4px solid white;
     margin: 90px;
@@ -51,7 +51,7 @@ input {
   padding: 12px;
   background: transparent;
   border: none;
-
+  border-bottom: 1px solid #777;
   color: white;
   font-size: 22px;
   margin-bottom: 30px;
@@ -59,11 +59,11 @@ input {
   outline: none;
 }
 
-.password{
+.thepassword{
 color: aliceblue;
 }
 
-p{
+.conf{
 color: aliceblue;
 }
 
