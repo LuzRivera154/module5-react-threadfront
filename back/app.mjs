@@ -59,35 +59,54 @@ async function main() {
         app.post('/register', async (request, response) => {
             try {
                 const { username, email, password, verifiedPassword } = request.body;
-                // Validation : vérifier que tous les champs obligatoires sont présents
+
+                // Vérification des champs obligatoires
                 if (!email || !password || !username || !verifiedPassword) {
                     return response.status(400).json({
+                        success: false,
                         message: "Les champs email, username, password sont requis",
                     });
                 }
 
+                // Vérification de la correspondance des mots de passe
                 if (password !== verifiedPassword) {
                     return response.status(400).json({
+                        success: false,
                         message: "Les mots de passe ne correspondent pas",
                     });
                 }
 
-                //Creation
-                const user = await User.create({ username, email, password });
-                // Response 
-                return response
-                    .status(201)
-                    .json({ message: "Utilisateur créé avec succès", userId: user.id });
+                // Vérification si l'email existe déjà
+                const existingUser = await User.findOne({ where: { email } });
+                if (existingUser) {
+                    return response.status(409).json({
+                        success: false,
+                        message: "Cet email est déjà utilisé"
+                    });
+                }
+
+                // Hash du mot de passe avant création
+                const hashedPassword = await bcrypt.hash(password, 10);
+
+                // Création de l'utilisateur
+                const user = await User.create({ username, email, password: hashedPassword });
+
+                // Réponse succès
+                return response.status(201).json({
+                    success: true,           
+                    message: "Utilisateur créé avec succès",
+                    userId: user.id
+                });
 
             } catch (error) {
-                // Gestion des erreurs : email en doublon
-                if (error.name === "SequelizeUniqueConstraintError") {
-                    return res.status(409).json({ message: "Cet email est déjà utilisé" });
-                }
-                //Erreur serveur générique
-                response.status(500).json({ error: "Erreur lors de l'enregistrement de l'utilisateur" });
-            };
+                console.error("Erreur serveur /register :", error);
+                return response.status(500).json({
+                    success: false,
+                    message: "Erreur serveur lors de l'enregistrement de l'utilisateur"
+                });
+            }
         });
+
 
         // Route POST /login : authentification et génération du cookie JWT
         app.post('/login', async (request, response) => {

@@ -1,6 +1,6 @@
+
 body {
-  background-color: #1c1c1c;
-  height: 100vh;
+    background-color: black;
 }
 
 .container-register {
@@ -10,39 +10,34 @@ body {
   flex-direction: column;
 }
 
-h2 {
-  font-size: 40px;
+.create {
+  font-size: 45px;
   margin: 80px;
   border-left: 4px solid white;
   padding-left: 10px;
   display: flex;
+  margin-left: 110px; 
 }
 
-
-form {
+.formulaire {
   width: 250px;    
   margin-left: 90px; 
   display: flex;
   flex-direction: column;
 }
 
-input {
+.inputP {
   width: 100%;
-  padding: 12px 0;
   background: transparent;
   border: none;
   color: white;
   font-size: 22px;
-  margin-bottom: 30px;
+  margin: 20px;
   letter-spacing: 3px;
   outline: none;
 }
 
-input::placeholder {
-  color: #b8b8b8;
-}
-
-button {
+.buttonSub {
   width: 200px;
   padding: 10px;
   font-size: 20px;
@@ -53,7 +48,7 @@ button {
   cursor: pointer;
 }
 
-p {
+.success {
   text-align: center;
   font-size: 22px;
 }
