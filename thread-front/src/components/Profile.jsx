@@ -8,14 +8,13 @@ export function Profile() {
     const { id } = useParams();
     const [currentData, setData] = useState(null)
     const navigate = useNavigate();
-  const handleClick = (path) => () => {
-    navigate(path);
-};
+    const handleClick = (path) => () => {
+        navigate(path);
+    };
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const response = await fetch(`http://localhost:3000/users/${id}/profile`, {
-                    method: 'GET',
                     credentials: 'include',
                 }
                 );
@@ -28,8 +27,10 @@ export function Profile() {
         }
         fetchProfile()
     }, [id]);
-    if (!currentData) return <p>Cargando perfil...</p>;
-    const user = currentData[0].User
+
+    if (!currentData) return <p className="p-loading">Cargando perfil...</p>;
+
+    const user = currentData.user;
     return (
         <div className="div-container-profile">
             <h2 className="title-profile">Profile</h2>
