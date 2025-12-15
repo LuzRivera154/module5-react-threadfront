@@ -3,11 +3,18 @@
     font-size: 3rem;
     cursor: pointer;
 }
-.icon-footer:hover{
+.div-container-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+}
+.icon-footer:hover {
     color: rgba(255, 255, 255, 0.726);
 }
-.messenger{
-    font-size: 2rem;
+
+.messenger {
+    font-size: 1.5rem;
     color: white;
 }
 
@@ -18,15 +25,29 @@
 }
 
 .title-profile {
-    margin-bottom: 1rem;
+    display: flex;
     font-size: 3rem;
-    margin-left: 5rem;
+    margin: .5rem 0;
 
 }
 
 .username-profile {
     font-size: 2rem;
-    text-align: start;
+    font-weight: bold;
+    display: flex;
+    margin: 0;
+}
+
+.line {
+    position: relative;
+    bottom: 11px;
+}
+.container-icon-count{
+    display: flex;
     justify-content: flex-start;
-    margin-left: 5rem;
+    gap: 5px;
+}
+.number-span-profile{
+    font-size: 1.2rem;
+    font-weight: bolder;
 }
