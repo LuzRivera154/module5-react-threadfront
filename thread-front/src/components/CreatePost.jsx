@@ -1,43 +1,45 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { DateDisplay } from "./DateDisplay.jsx";
 import "./CreatePost.css";
 
 export function CreatePost({ onPostCreated }) {
   const [content, setContent] = useState("");
-  const [error, setError] = useState(null); // Ajout d'un état pour gérer les erreurs
+  const [title, setTitle] = useState(""); 
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
+  const post = { createdAt: new Date().toISOString() };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    if (!content.trim()) {
+      setError("Le contenu du post ne peut pas être vide.");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:3000/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // 'credentials: "include"' est crucial pour envoyer le cookie JWT
         credentials: "include",
         body: JSON.stringify({
-          // Votre backend attend 'title' et 'content'.
-          // Pour l'instant, nous passons null pour title.
-          title: null,
-          content: content,
+          title: title.trim() || "Sans titre",
+          content: content.trim(),
         }),
       });
-      setError(null); // Réinitialiser les erreurs
 
-      // On s'assure que le contenu n'est pas vide
-      if (!content.trim()) {
-        setError("Le contenu du post ne peut pas être vide.");
-        return;
-      }
+      // Réinitialiser les messages
+      setError(null);
 
       if (!response.ok) {
-        // Si le serveur retourne une erreur (ex: 401, 500)
+        // Si le serveur retourne une erreur
         const errorData = await response.json();
         throw new Error(
-          errorData.message ||
-            "Une erreur est survenue lors de la création du post."
+          errorData.error || errorData.message || "Erreur lors de la création du post."
         );
       }
 
@@ -49,23 +51,39 @@ export function CreatePost({ onPostCreated }) {
         onPostCreated(newPost);
       }
 
-      // Vide le textarea après le succès de l'envoi
+      // Message de succès
+      setSuccessMessage("Post créé avec succès !");
+      
+      // Vide les champs après le succès de l'envoi
+      setTitle("");
       setContent("");
+
+      // Redirection vers la page d'accueil après 1.5 secondes
+      setTimeout(() => {
+        navigate("/home");
+      }, 1500);
+
     } catch (err) {
       console.error("Erreur lors de la soumission du post:", err);
       setError(err.message);
     }
   };
+
   return (
-    <form className="create-post" onSubmit={handleSubmit}>
+ <form className="create-post" onSubmit={handleSubmit} style={{position: 'relative', minHeight: '100vh'}}>
       <h1 className="post-title">New Post</h1>
       {error && <p className="error-message">{error}</p>}
-      <textarea
-        className="post-content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Tape ton texte ici..."
-      />
+      <div className="post-content-wrapper">
+        <textarea
+          className="post-content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Tapez votre post ici ..."
+        />
+        <div className="date-preview">
+          <DateDisplay date={post.createdAt} />
+        </div>
+      </div>
       <button className="post-button" type="submit">
         Poster !
       </button>
