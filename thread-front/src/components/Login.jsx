@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import "./Login.css";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +20,7 @@ export function Login() {
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // <- importante para recibir la cookie HTTP-only
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
@@ -27,6 +28,9 @@ export function Login() {
       
       if (response.ok) {
         setMessage("Bienvenue ! Vous êtes connecté.");
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
       } else {
         setMessage(data.message || "Erreur de connexion");
       }
@@ -36,18 +40,14 @@ export function Login() {
     }
   };
 
-
   return (
-
     <div className="login-container">
       <h1 className="title">Connexion</h1>
      
-
-      <form className="form-login"onSubmit={handleSubmit} >
-        <div >
-
-         
-          <input className="contact-mail"
+      <form className="form-login" onSubmit={handleSubmit}>
+        <div>
+          <input
+            className="contact-mail"
             type="email"
             id="email"
             value={email}
@@ -57,10 +57,10 @@ export function Login() {
           />
         </div>
 
-        <div >
-          
-          <input className="mdp"
-            type="thepassword"
+        <div>
+          <input
+            className="mdp"
+            type="password" 
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -68,13 +68,16 @@ export function Login() {
             required
           />
         </div>
+
+        <button className="btn" type="submit">
+          Se connecter
+        </button>
       </form>
 
-        <button className="btn" type="submit" >Se connecter</button>
-
-        <p className="conf">{message}</p>
-
-        <a href="/register" className="register-link">Se créer un compte</a>
+      <p className="conf">{message}</p>
+      <a href="/register" className="register-link">
+        Se créer un compte
+      </a>
     </div>
   );
 }

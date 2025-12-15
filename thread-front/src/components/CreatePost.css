@@ -1,5 +1,7 @@
-/* body {
-    background-color: #1b1b1b;
+body {
+  background-color: #1b1b1b;
+  margin: 0;
+  min-height: 100vh;
 }
 
 .create-post {
@@ -7,22 +9,56 @@
   flex-wrap: wrap;
   flex-direction: column;
   gap: 37px;
+  padding: 20px;
+  padding-bottom: 70px;
+}
+
+.post-content-wrapper {
+  position: relative;
+  width: 100%;
 }
 
 .post-content {
   height: 171px;
   border-radius: 9px;
-  display: flex;
-  flex-wrap: wrap;
-  color: #999;;
+  color: white;
+  font-size: 10px;
+  line-height: 1.5;
   background-color: #0d0d0d;
   border: none;
+  padding: 15px 10px 35px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.post-content::placeholder {
+  color: #999;
+  opacity: 1;
+  padding-top: 5px;
+}
+
+.date-display {
+  position: absolute;
+  bottom: 23px;
+  left: 0;
+  padding-left: 10px;
+  color: gray;
+  font-size: 10px;
+  z-index: 1;
+  margin: 0;
 }
 
 .post-title {
-  border-left: 4px solid white;
+  border-left: 3px solid white;
   color: white;
-  padding-left: 10px;
+  padding-left: 7px;
+  margin-left: 3px;
+  font-size: 47px;
+  line-height: 35px;
+  height: 37px;
+  margin-top: 15px;
+  display: flex;
 }
 
 .error-message {
@@ -30,6 +66,41 @@
 }
 
 .post-button {
-  width: 30%;
-  height: 36px;
-} */
+  width: 53%;
+  height: 53px;
+  margin-left: 0;
+  border-radius: 16px;
+  font-size: 19px;
+  font-weight: bolder;
+}
+
+.icons-container {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.icons-container i {
+  color: white;
+  font-size: 41px;
+  cursor: pointer;
+}
+
+.icons-container .fa-circle-user {
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  padding: 5px;
+  margin-left: 143px;
+  margin-right: auto;
+}
+
+.icons-container .fa-message {
+  margin-right: 20px;
+}
