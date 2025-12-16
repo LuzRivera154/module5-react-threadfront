@@ -1,23 +1,24 @@
-
 .container-register {
   display: flex;
   justify-content: flex-start;
   color: aliceblue;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 .create {
   font-size: 45px;
   margin: 80px;
   border-left: 4px solid white;
-  padding-left: 10px;
   display: flex;
-  margin-left: 110px; 
+  padding: 4px;
+  margin: 4rem 3rem 2rem 3rem;
+  ;
 }
 
 .formulaire {
-  width: 250px;    
-  margin-left: 90px; 
+  width: 250px;
+  margin-left: 2rem;
   display: flex;
   flex-direction: column;
 }
