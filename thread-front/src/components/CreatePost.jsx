@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay.jsx";
 import "./CreatePost.css";
@@ -10,6 +10,16 @@ export function CreatePost({ onPostCreated }) {
   const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
   const post = { createdAt: new Date().toISOString() };
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    console.log(localStorage.getItem("userId"));
+
+   if(storedUserId){
+    setUserId(Number(storedUserId))
+   }
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -69,6 +79,7 @@ export function CreatePost({ onPostCreated }) {
       setError(err.message);
     }
   };
+
 
   return (
     <form className="create-post" onSubmit={handleSubmit}>

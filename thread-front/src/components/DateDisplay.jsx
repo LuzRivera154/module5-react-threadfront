@@ -9,7 +9,6 @@ export function DateDisplay({ date, className = '' }) {
     hourCycle: 'h23' 
   };
 
-
   const dateOptions = {
     day: '2-digit',
     month: 'long',
