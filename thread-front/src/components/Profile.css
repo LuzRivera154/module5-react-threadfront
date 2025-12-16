@@ -23,9 +23,13 @@
 }
 
 .footer-profile {
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+}
+.div-footer-profile{
     display: flex;
     justify-content: space-around;
-
 }
 
 .title-profile {

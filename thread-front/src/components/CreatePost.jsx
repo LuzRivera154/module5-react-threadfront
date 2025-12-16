@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay.jsx";
 import "./CreatePost.css";
 
 export function CreatePost({ onPostCreated }) {
   const [content, setContent] = useState("");
-  const [title, setTitle] = useState(""); 
+  const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
   const post = { createdAt: new Date().toISOString() };
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    console.log(localStorage.getItem("userId"));
+
+   if(storedUserId){
+    setUserId(Number(storedUserId))
+   }
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (!content.trim()) {
       setError("Le contenu du post ne peut pas être vide.");
       return;
@@ -53,7 +63,7 @@ export function CreatePost({ onPostCreated }) {
 
       // Message de succès
       setSuccessMessage("Post créé avec succès !");
-      
+
       // Vide les champs après le succès de l'envoi
       setTitle("");
       setContent("");
@@ -69,8 +79,9 @@ export function CreatePost({ onPostCreated }) {
     }
   };
 
+
   return (
- <form className="create-post" onSubmit={handleSubmit} style={{position: 'relative', minHeight: '100vh'}}>
+    <form className="create-post" onSubmit={handleSubmit} style={{ position: 'relative', minHeight: '100vh' }}>
       <h1 className="post-title">New Post</h1>
       {error && <p className="error-message">{error}</p>}
       <div className="post-content-wrapper">
@@ -88,7 +99,7 @@ export function CreatePost({ onPostCreated }) {
         Poster !
       </button>
       <div className="icons-container">
-        <i className="fa-solid fa-circle-user" onClick={() => navigate('/profile')}></i>
+        <i className="fa-solid fa-circle-user" onClick={() => navigate(`/profile/${userId}`)}></i>
         <i className="fa-regular fa-message" onClick={() => navigate('/feed')}></i>
       </div>
     </form>
