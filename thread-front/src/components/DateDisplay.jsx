@@ -1,4 +1,4 @@
-export function DateDisplay({ date }) {
+export function DateDisplay({ date, className = '' }) {
   if (!date) return null;
 
   const dateObj = new Date(date);

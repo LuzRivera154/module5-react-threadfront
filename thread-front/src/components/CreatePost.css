@@ -1,3 +1,4 @@
+/* ---- A SUPPRIMER ---- */
 body {
   background-color: #1b1b1b;
   margin: 0;
@@ -18,7 +19,7 @@ body {
   width: 100%;
 }
 
-.post-content {
+.feed-content {
   height: 171px;
   border-radius: 9px;
   color: white;
@@ -38,15 +39,14 @@ body {
   padding-top: 5px;
 }
 
-.date-display {
-  position: absolute;
-  bottom: 23px;
-  left: 0;
+.date-preview {
+  display: flex;
   padding-left: 10px;
   color: gray;
   font-size: 10px;
-  z-index: 1;
   margin: 0;
+  position: relative;
+  top: -31px;
 }
 
 .post-title {
@@ -75,15 +75,17 @@ body {
 }
 
 .icons-container {
-  position: fixed;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  padding: 0 20px;
-  z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    align-items: center;
+    padding: 12px 0;
+    background-color: transparent;
+    
+    z-index: 1000;
 }
 
 .icons-container i {
@@ -92,15 +94,16 @@ body {
   cursor: pointer;
 }
 
-.icons-container .fa-circle-user {
-  background-color: white;
-  color: black;
-  border-radius: 50%;
-  padding: 5px;
-  margin-left: 143px;
-  margin-right: auto;
+
+.icon-profile {
+  grid-column: 2;
+  justify-self: center; 
 }
 
-.icons-container .fa-message {
-  margin-right: 20px;
+
+.icon-feed {
+  grid-column: 3;
+  justify-self: end; 
+  padding-right: 25px; 
 }
+
