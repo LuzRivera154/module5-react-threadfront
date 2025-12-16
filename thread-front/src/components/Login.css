@@ -5,6 +5,9 @@ body {
   text-align: center;
   flex-wrap: wrap;
   font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  color: white;
 }
 
 .login-container {
@@ -64,8 +67,7 @@ body {
   flex-direction: column;
 }
 
-input {
-
+.contact-mail,  .mdp{
   padding: 12px;
   background: transparent;
   border: none;
