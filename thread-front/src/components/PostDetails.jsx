@@ -11,6 +11,16 @@ export function PostDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    console.log(localStorage.getItem("userId"));
+
+   if(storedUserId){
+    setUserId(Number(storedUserId))
+   }
+  }, [])
 
   useEffect(() => {
     fetchPostDetails();
@@ -215,7 +225,7 @@ export function PostDetails() {
 
         <div className="icons-postdetail">
           <i className="fa-solid fa-circle-plus" style={{ color: '#ffffff' }} onClick={() => navigate('/createPost')}  ></i>
-          <i className="fa-solid fa-circle-user" onClick={() => navigate('/profile')}></i>
+          <i className="fa-solid fa-circle-user" onClick={() => navigate(`/profile/${post.User.id}`)}></i>
           <i className="fa-solid fa-message" style={{ color: '#ffffff' }} onClick={() => navigate('/feed')}></i>
         </div>
       </div>
