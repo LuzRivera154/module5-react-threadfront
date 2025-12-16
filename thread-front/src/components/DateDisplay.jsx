@@ -1,4 +1,4 @@
-export function DateDisplay({ date }) {
+export function DateDisplay({ date, className = `` }) {
   if (!date) return null;
 
   const dateObj = new Date(date);
@@ -8,7 +8,6 @@ export function DateDisplay({ date }) {
     minute: '2-digit',
     hourCycle: 'h23' 
   };
-
 
   const dateOptions = {
     day: '2-digit',

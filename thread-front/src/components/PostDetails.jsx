@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import "./PostDetails.css";
+import { DateDisplay } from "./DateDisplay";
+import "./PostDetails.css";
 
 export function PostDetails() {
   const { postId } = useParams();
@@ -20,11 +21,11 @@ export function PostDetails() {
       const response = await fetch(`http://localhost:3000/posts/${postId}`, {
         credentials: "include",
       });
-      
+
       if (!response.ok) {
         throw new Error("Post non trouvé");
       }
-      
+
       const data = await response.json();
       setPost(data);
       setComments(data.Commentaires || []);
@@ -37,7 +38,7 @@ export function PostDetails() {
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
-    
+
     if (!newComment.trim()) return;
 
     try {
@@ -57,7 +58,7 @@ export function PostDetails() {
 
       if (response.ok) {
         const createdComment = await response.json();
-        setComments([...comments, createdComment]);
+        setComments([createdComment, ...comments]); // com a la fin
         setNewComment("");
       }
     } catch (err) {
@@ -95,7 +96,7 @@ export function PostDetails() {
       });
 
       if (response.ok) {
-        navigate("/home");
+        navigate("/feed");
       }
     } catch (err) {
       console.error("Erreur lors de la suppression du post:", err);
@@ -108,66 +109,114 @@ export function PostDetails() {
 
   return (
     <div className="post-details-container">
-      <header className="post-details-header">
-        <button className="back-button" onClick={() => navigate("/home")}>
-          ← Retour
-        </button>
-        <button className="delete-post-button" onClick={handleDeletePost}>
-          Supprimer le post
-        </button>
-      </header>
 
+      <h1 className="titlePost">Post</h1>
       <div className="post-main">
-        <h1 className="post-details-title">{post.title || "Sans titre"}</h1>
+        <div className="deletepost">
+          <button
+            className="delete-post-button"
+            onClick={() => handleDeletePost(post.id)}
+          >
+            ×
+          </button>
+        </div>
+
+        <span className="post-author">@{post.User?.username || "Anonyme"}</span>
+        <p className="post-details-title">{post.title || "Sans titre"}</p>
         <p className="post-details-content">{post.content}</p>
         <div className="post-meta">
-          <span className="post-author">@{post.User?.username || "Anonyme"}</span>
           <span className="post-date">
-            {new Date(post.createdAt).toLocaleString()}
+            <DateDisplay date={post.createdAt} />
           </span>
         </div>
       </div>
 
       <div className="comments-section">
-        <h3 className="comments-title">Commentaires ({comments.length})</h3>
-        
-        <form className="comment-form" onSubmit={handleSubmitComment}>
-          <textarea
-            className="comment-input"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Ajouter un commentaire..."
-            rows="3"
-          />
-          <button type="submit" className="comment-submit-button">
-            Commenter
-          </button>
-        </form>
+        <h3 className="comments-title">
+          {comments.length}
+          <i className="fa-solid fa-message" style={{ color: "#ffffff" }}></i>{" "}
+        </h3>
 
         <div className="comments-list">
           {comments.length === 0 ? (
-            <p className="no-comments">Aucun commentaire</p>
+            <>
+              <p className="no-comments">Aucun commentaire</p>
+              <form className="comment-form" onSubmit={handleSubmitComment}>
+                <textarea
+                  className="comment-input"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Tapez votre commentaire ici.."
+                  rows="2"
+                />
+                <button type="submit" className="comment-submit-button">
+                  <i className="fa-solid fa-check"></i>
+                </button>
+              </form>
+            </>
           ) : (
-            comments.map((comment) => (
-              <div key={comment.id} className="comment-card">
+            <>
+              {/* Commentaire le plus récent */}
+              <div key={comments[0].id} className="comment-card">
                 <div className="comment-header">
                   <span className="comment-author">
-                    @{comment.User?.username || "Anonyme"}
+                    @{comments[0].User?.username || "Anonyme"}
                   </span>
                   <button
                     className="delete-comment-button"
-                    onClick={() => handleDeleteComment(comment.id)}
+                    onClick={() => handleDeleteComment(comments[0].id)}
                   >
                     ×
                   </button>
                 </div>
-                <p className="comment-content">{comment.content}</p>
+                <p className="comment-content">{comments[0].content}</p>
                 <span className="comment-date">
-                  {new Date(comment.createdAt).toLocaleDateString()}
+                  <DateDisplay date={comments[0].createdAt} />
                 </span>
               </div>
-            ))
+
+              {/* Zone de saisie juste sous le commentaire récent */}
+              <form className="comment-form" onSubmit={handleSubmitComment}>
+                <textarea
+                  className="comment-input"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Tapez votre commentaire ici.."
+                  rows="2"
+                />
+                <button type="submit" className="comment-submit-button">
+                  <i className="fa-solid fa-check"></i>
+                </button>
+              </form>
+
+              {/* Autres commentaires plus anciens */}
+              {comments.slice(1).map((comment) => (
+                <div key={comment.id} className="comment-card">
+                  <div className="comment-header">
+                    <span className="comment-author">
+                      @{comment.User?.username || "Anonyme"}
+                    </span>
+                    <button
+                      className="delete-comment-button"
+                      onClick={() => handleDeleteComment(comment.id)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <p className="comment-content">{comment.content}</p>
+                  <span className="comment-date">
+                    <DateDisplay date={comment.createdAt} />
+                  </span>
+                </div>
+              ))}
+            </>
           )}
+        </div>
+
+        <div className="icons-postdetail">
+          <i className="fa-solid fa-circle-plus" style={{ color: '#ffffff' }} onClick={() => navigate('/createPost')}  ></i>
+          <i className="fa-solid fa-circle-user" onClick={() => navigate('/profile')}></i>
+          <i className="fa-solid fa-message" style={{ color: '#ffffff' }} onClick={() => navigate('/feed')}></i>
         </div>
       </div>
     </div>
