@@ -22,22 +22,20 @@ export function Profile() {
                 );
                 const data = await response.json();
                 setData(data);
-                console.log(data);
-                console.log(data.posts)
             } catch (error) {
                 console.error(error);
             }
         }
         fetchProfile()
     }, [id]);
-    
+
     if (!currentData) return <p>Cargando perfil...</p>;
     const user = currentData.user;
     const posts = currentData.posts;
-    
-        const lastPost = [...posts].sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        )[0];
+
+    const lastPost = [...posts].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    )[0];
 
     return (
         <div className="div-container-profile">
@@ -48,7 +46,7 @@ export function Profile() {
                 {lastPost && <Post post={lastPost} />}  </div>
 
             <div className="container-icon-count">
-               <span className="number-span-profile"> {posts.length} </span>
+                <span className="number-span-profile"> {posts.length} </span>
                 <i className="fa-brands fa-facebook-messenger messenger"></i>
             </div>
             <div className="div-container-post-profile">
@@ -58,8 +56,10 @@ export function Profile() {
 
             </div>
             <footer className="footer-profile">
-                <i className="fa-solid fa-circle-plus icon-footer" onClick={handleClick("/createPost")}></i>
-                <i className="fa-solid fa-message icon-footer" onClick={handleClick("/feed")}></i>
+                <div className="div-footer-profile">
+                    <i className="fa-solid fa-circle-plus icon-footer" onClick={handleClick("/createPost")}></i>
+                    <i className="fa-solid fa-message icon-footer" onClick={handleClick("/feed")}></i>
+                </div>
             </footer>
         </div>
     )
