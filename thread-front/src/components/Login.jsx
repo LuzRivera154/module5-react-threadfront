@@ -42,10 +42,10 @@ export function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="title">Connexion</h1>
+      <h1 className="title-conexion"><i className="line-login">|</i>Connexion</h1>
      
       <form className="form-login" onSubmit={handleSubmit}>
-        <div>
+       
           <input
             className="contact-mail"
             type="email"
@@ -55,9 +55,7 @@ export function Login() {
             placeholder="email"
             required
           />
-        </div>
-
-        <div>
+       
           <input
             className="mdp"
             type="password" 
@@ -67,9 +65,8 @@ export function Login() {
             placeholder="mot de passe"
             required
           />
-        </div>
-
-        <button className="btn" type="submit">
+        
+        <button className="btn-login" type="submit">
           Se connecter
         </button>
       </form>

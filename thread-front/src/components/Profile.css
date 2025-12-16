@@ -32,6 +32,7 @@
     display: flex;
     font-size: 3rem;
     margin: .5rem 0;
+    font-family: sans-serif;
 
 }
 
@@ -45,6 +46,7 @@
 .line {
     position: relative;
     bottom: 11px;
+    left: 5px;
 }
 .container-icon-count{
     display: flex;
