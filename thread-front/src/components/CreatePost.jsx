@@ -16,9 +16,9 @@ export function CreatePost({ onPostCreated }) {
     const storedUserId = localStorage.getItem("userId");
     console.log(localStorage.getItem("userId"));
 
-   if(storedUserId){
-    setUserId(Number(storedUserId))
-   }
+    if (storedUserId) {
+      setUserId(Number(storedUserId))
+    }
   }, [])
 
   const handleSubmit = async (event) => {
@@ -50,8 +50,8 @@ export function CreatePost({ onPostCreated }) {
         const errorData = await response.json();
         throw new Error(
           errorData.error ||
-            errorData.message ||
-            "Erreur lors de la création du post."
+          errorData.message ||
+          "Erreur lors de la création du post."
         );
       }
 
@@ -103,7 +103,7 @@ export function CreatePost({ onPostCreated }) {
         {/* Ajout de la classe icon-profile pour centrer */}
         <i
           className="fa-solid fa-circle-user icon-profile"
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate(`/profile/${userId}`)}
         ></i>
 
         {/* Ajout de la classe icon-feed pour mettre à droite */}
