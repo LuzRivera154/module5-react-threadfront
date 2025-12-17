@@ -16,9 +16,9 @@ export function CreatePost({ onPostCreated }) {
     const storedUserId = localStorage.getItem("userId");
     console.log(localStorage.getItem("userId"));
 
-   if(storedUserId){
-    setUserId(Number(storedUserId))
-   }
+    if (storedUserId) {
+      setUserId(Number(storedUserId))
+    }
   }, [])
 
   const handleSubmit = async (event) => {
@@ -49,7 +49,9 @@ export function CreatePost({ onPostCreated }) {
         // Si le serveur retourne une erreur
         const errorData = await response.json();
         throw new Error(
-          errorData.error || errorData.message || "Erreur lors de la création du post."
+          errorData.error ||
+          errorData.message ||
+          "Erreur lors de la création du post."
         );
       }
 
@@ -72,7 +74,6 @@ export function CreatePost({ onPostCreated }) {
       setTimeout(() => {
         navigate("/feed");
       }, 1500);
-
     } catch (err) {
       console.error("Erreur lors de la soumission du post:", err);
       setError(err.message);
@@ -81,12 +82,12 @@ export function CreatePost({ onPostCreated }) {
 
 
   return (
-    <form className="create-post" onSubmit={handleSubmit} style={{ position: 'relative', minHeight: '100vh' }}>
+    <form className="create-post" onSubmit={handleSubmit}>
       <h1 className="post-title">New Post</h1>
       {error && <p className="error-message">{error}</p>}
       <div className="post-content-wrapper">
         <textarea
-          className="post-content"
+          className="feed-content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Tapez votre post ici ..."
@@ -99,8 +100,18 @@ export function CreatePost({ onPostCreated }) {
         Poster !
       </button>
       <div className="icons-container">
-        <i className="fa-solid fa-circle-user" onClick={() => navigate(`/profile/${userId}`)}></i>
-        <i className="fa-regular fa-message" onClick={() => navigate('/feed')}></i>
+        {/* Ajout de la classe icon-profile pour centrer */}
+        <i
+          className="fa-solid fa-circle-user icon-profile"
+          onClick={() => navigate(`/profile/${userId}`)}
+        ></i>
+
+        {/* Ajout de la classe icon-feed pour mettre à droite */}
+        <i
+          className="fa-solid fa-message icon-feed"
+          style={{ color: "#ffffff" }}
+          onClick={() => navigate("/feed")}
+        ></i>
       </div>
     </form>
   );

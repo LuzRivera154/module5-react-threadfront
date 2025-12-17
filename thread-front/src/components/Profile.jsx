@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css"
 import { Post } from "./Post";
+import { BtnLogout } from "./BtnLogout";
 
 export function Profile() {
     const { id } = useParams();
@@ -21,6 +22,9 @@ export function Profile() {
                 }
                 );
                 const data = await response.json();
+                if (!response.ok) {
+                    navigate("/feed")
+                }
                 setData(data);
             } catch (error) {
                 console.error(error);
@@ -39,20 +43,28 @@ export function Profile() {
 
     return (
         <div className="div-container-profile">
-            <h2 className="title-profile"><i className="line">|</i>Profile</h2>
+            <div className="div-container-title-btn-profile">
+                <h2 className="title-profile">Profile</h2>
+                <BtnLogout />
+            </div>
             <p className="username-profile">@{user.username}</p>
 
-            <div className="last-post-container">
+            <div>
                 {lastPost && <Post post={lastPost} />}  </div>
 
             <div className="container-icon-count">
                 <span className="number-span-profile"> {posts.length} </span>
                 <i className="fa-brands fa-facebook-messenger messenger"></i>
             </div>
-            <div className="div-container-post-profile">
-                {posts.map((post) => {
-                    return <Post key={post.id} post={post} />;
-                })}
+            <div>
+                {
+                    posts.length === 0 ? (
+                        <p>Aucun post pour le moment</p>
+                    ) : (
+
+                        posts.map((post) => {
+                            return <Post key={post.id} post={post} />;
+                        }))}
 
             </div>
             <footer className="footer-profile">

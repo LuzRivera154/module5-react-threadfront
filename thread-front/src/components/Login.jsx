@@ -33,7 +33,7 @@ export function Login() {
 
         setMessage("Bienvenue ! Vous êtes connecté.");
         setTimeout(() => {
-          navigate("/Feed");
+          navigate("/feed");
         }, 1000);
       } else {
         setMessage(data.message || "Erreur de connexion");
@@ -46,7 +46,7 @@ export function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="title-conexion"><i className="line-login">|</i>Connexion</h1>
+      <h1 className="title-conexion">Connexion</h1>
 
       <form className="form-login" onSubmit={handleSubmit}>
 
