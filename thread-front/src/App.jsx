@@ -9,7 +9,7 @@ import { Profile } from "./components/Profile.jsx";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
