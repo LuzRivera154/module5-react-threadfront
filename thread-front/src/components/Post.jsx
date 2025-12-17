@@ -36,7 +36,7 @@ export function Post({ post }) {
                     <i class="fa-solid fa-xmark delete-icon"></i>
                 </button>
             </div>
-            <div className="div-container">
+            <div>
                 <h4 className="h4-title-post">{post.title}</h4>
                 <p className="p-content-post">{post.content}</p>
             </div>

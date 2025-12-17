@@ -16,12 +16,7 @@ body {
   overflow-y: hidden;
 }
 
-.line-login {
-  position: relative;
-  bottom: 6px;
-  font-family: sans-serif;
-  left: 6px;
-}
+
 
 .title-conexion {
   color: aliceblue;
@@ -59,11 +54,6 @@ body {
   text-align: center;
 }
 
-.label {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
 
 .email {
   display: flex;
@@ -92,6 +82,6 @@ body {
   gap: 1rem;
   align-self: center;
 }
-.message-success-login{
+.conf{
   text-align: center;
 }
