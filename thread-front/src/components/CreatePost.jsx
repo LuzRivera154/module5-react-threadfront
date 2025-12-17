@@ -70,7 +70,7 @@ export function CreatePost({ onPostCreated }) {
 
       // Redirection vers la page d'accueil après 1.5 secondes
       setTimeout(() => {
-        navigate("/home");
+        navigate("/feed");
       }, 1500);
 
     } catch (err) {

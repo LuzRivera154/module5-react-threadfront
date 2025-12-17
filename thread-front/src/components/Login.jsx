@@ -33,7 +33,7 @@ export function Login() {
 
         setMessage("Bienvenue ! Vous êtes connecté.");
         setTimeout(() => {
-          navigate("/home");
+          navigate("/Feed");
         }, 1000);
       } else {
         setMessage(data.message || "Erreur de connexion");
