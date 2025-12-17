@@ -17,9 +17,9 @@ export function CreatePost({ onPostCreated }) {
     console.log(localStorage.getItem("userId"));
 
     if (storedUserId) {
-      setUserId(Number(storedUserId))
+      setUserId(Number(storedUserId));
     }
-  }, [])
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,8 +50,8 @@ export function CreatePost({ onPostCreated }) {
         const errorData = await response.json();
         throw new Error(
           errorData.error ||
-          errorData.message ||
-          "Erreur lors de la création du post."
+            errorData.message ||
+            "Erreur lors de la création du post."
         );
       }
 
@@ -80,10 +80,16 @@ export function CreatePost({ onPostCreated }) {
     }
   };
 
-
   return (
     <form className="create-post" onSubmit={handleSubmit}>
       <h1 className="post-title">New Post</h1>
+      <input
+        className="post-title-input"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Tapez votre titre ici ..."
+      />
       {error && <p className="error-message">{error}</p>}
       <div className="post-content-wrapper">
         <textarea
@@ -100,13 +106,10 @@ export function CreatePost({ onPostCreated }) {
         Poster !
       </button>
       <div className="icons-container">
-        {/* Ajout de la classe icon-profile pour centrer */}
         <i
           className="fa-solid fa-circle-user icon-profile"
           onClick={() => navigate(`/profile/${userId}`)}
         ></i>
-
-        {/* Ajout de la classe icon-feed pour mettre à droite */}
         <i
           className="fa-solid fa-message icon-feed"
           style={{ color: "#ffffff" }}
