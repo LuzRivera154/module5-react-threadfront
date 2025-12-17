@@ -150,7 +150,7 @@ export function PostDetails() {
         <div>
           {comments.length === 0 ? (
             <>
-              <p>Aucun commentaire</p>
+              <p className="nocomment">Aucun commentaire</p>
               <form className="comment-form" onSubmit={handleSubmitComment}>
                 <textarea
                   className="comment-input"
@@ -186,7 +186,7 @@ export function PostDetails() {
               </div>
 
               {/* Zone de saisie juste sous le commentaire récent */}
-              <form className="comment-form" onSubmit={handleSubmitComment}>
+              <form className="commentform" onSubmit={handleSubmitComment}>
                 <textarea
                   className="comment-input"
                   value={newComment}
@@ -214,7 +214,7 @@ export function PostDetails() {
                     </button>
                   </div>
                   <p className="comment-content">{comment.content}</p>
-                  <span>
+                  <span className="datecomment">
                     <DateDisplay date={comment.createdAt} />
                   </span>
                 </div>

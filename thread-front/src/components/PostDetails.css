@@ -3,7 +3,7 @@
     display: flex;
 }
 
-.post-details-content{
+.post-details-content {
     display: flex;
 }
 
@@ -20,13 +20,9 @@
 .comments-title {
     color: white;
     display: flex;
-    justify-content: start;
     margin: 35px;
-}  
-
-.post-author {
-    display: flex;
-    margin: 20px;
+    align-items: center;
+    gap: 5px;
 }
 
 .comments-section {
@@ -45,13 +41,15 @@
     height: 45px;
 }
 
-.postdetail-author{
+.postdetail-author {
     display: flex;
-
+    color: rgb(130, 255, 58);
 }
 
 .comment-card {
     background: linear-gradient(to right, white, grey);
+    color: black;
+    padding-left: 10px;
     border-radius: 20px;
     padding: 5px;
     margin-bottom: 24px;
@@ -68,12 +66,22 @@
     justify-content: center;
     padding: 20px;
     gap: 10px;
+}
 
+.commentform {
+    background: linear-gradient(to right, white, grey);
+    border-radius: 20px;
+    margin-bottom: 24px;
+    margin: 30px;
+    display: flex;
+    padding: 20px;
+    gap: 10px;
 }
 
 .comment-author {
     font-weight: 600;
     font-size: 14px;
+    color: green;
 }
 
 .comment-content {
@@ -90,23 +98,25 @@
 }
 
 .post-date {
-    left: 0;
-    padding-left: 10px;
+    padding-left: 6px;
+    display: flex;
     color: gray;
     font-size: 10px;
     z-index: 1;
     margin: 0;
 }
 
-.comment-form{
-    display: flex ;
-    justify-content: left;
+.comment-date {
+    display: flex;
+    padding-left: 10px;
+    color: black;
+    font-family: cursive;
 }
 
-h3.comments-title {
+.datecomment {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    padding-left: 10px;
+    font-family: cursive;
 }
 
 .comment-input {
@@ -116,16 +126,16 @@ h3.comments-title {
 }
 
 .deletepost {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .delete-post-button {
-  background: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: red;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: red;
 }
 
 .delete-comment-button {
@@ -147,6 +157,11 @@ h3.comments-title {
     align-items: center;
 }
 
+.nocomment {
+    display: flex;
+    justify-content: center;
+}
+
 .icons-postdetail {
     position: fixed;
     bottom: 0;
@@ -156,8 +171,7 @@ h3.comments-title {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 12px 0;
-    background-color: #110e0ec2;
-    border-top: 1px solid #000000;
+    background-color: #1b1b1b;
     z-index: 1000;
 }
 
