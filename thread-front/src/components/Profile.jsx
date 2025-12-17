@@ -41,7 +41,7 @@ export function Profile() {
     return (
         <div className="div-container-profile">
             <div className="div-container-title-btn-profile">
-            <h2 className="title-profile"><i className="line">|</i>Profile</h2>
+            <h2 className="title-profile">Profile</h2>
             <BtnLogout />
             </div>
             <p className="username-profile">@{user.username}</p>
