@@ -31,7 +31,7 @@ export function Login() {
         localStorage.setItem("userId", JSON.stringify(data.userId));
         console.log(data.userId)
 
-        setMessage(<p className="message-success-login">Bienvenue ! Vous êtes connecté.</p>);
+        setMessage("Bienvenue ! Vous êtes connecté.");
         setTimeout(() => {
           navigate("/feed");
         }, 1000);

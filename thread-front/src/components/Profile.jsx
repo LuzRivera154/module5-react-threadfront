@@ -22,6 +22,9 @@ export function Profile() {
                 }
                 );
                 const data = await response.json();
+                if (!response.ok) {
+                    navigate("/feed")
+                }
                 setData(data);
             } catch (error) {
                 console.error(error);
@@ -41,22 +44,22 @@ export function Profile() {
     return (
         <div className="div-container-profile">
             <div className="div-container-title-btn-profile">
-            <h2 className="title-profile">Profile</h2>
-            <BtnLogout />
+                <h2 className="title-profile">Profile</h2>
+                <BtnLogout />
             </div>
             <p className="username-profile">@{user.username}</p>
 
-            <div className="last-post-container">
+            <div>
                 {lastPost && <Post post={lastPost} />}  </div>
 
             <div className="container-icon-count">
                 <span className="number-span-profile"> {posts.length} </span>
                 <i className="fa-brands fa-facebook-messenger messenger"></i>
             </div>
-            <div className="div-container-post-profile">
+            <div>
                 {
                     posts.length === 0 ? (
-                        <p className="no-posts">Aucun post pour le moment</p>
+                        <p>Aucun post pour le moment</p>
                     ) : (
 
                         posts.map((post) => {

@@ -1,8 +1,3 @@
-.p-loading,
-.div-container-profile {
-    color: white;
-}
-
 .icon-footer {
     color: white;
     font-size: 3rem;
@@ -53,12 +48,6 @@
     font-weight: bold;
     display: flex;
     margin: 0;
-}
-
-.line {
-    position: relative;
-    bottom: 11px;
-    left: 5px;
 }
 
 .container-icon-count {
