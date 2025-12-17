@@ -22,7 +22,7 @@ export function DateDisplay({ date, className = '' }) {
   const resultat = `${heureFormatee} - ${dateFormatee}`;
 
   return (
-    <span className="date-display">
+    <span>
       {resultat}
     </span>
   );

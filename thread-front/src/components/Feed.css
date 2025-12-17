@@ -16,14 +16,14 @@
     position: relative;
 }
 
-.post-date {
+.feed-date {
     position: absolute;
     bottom: 10px;
     left: 20px;
+    padding-left: 6px;
     font-size: 10px;
     color: gray;
 }
-
 
 .post-feed{
     display: flex;
