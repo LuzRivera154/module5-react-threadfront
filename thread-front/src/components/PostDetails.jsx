@@ -118,7 +118,7 @@ export function PostDetails() {
   if (!post) return <div>Post non trouvé</div>;
 
   return (
-    <div className="post-details-container">
+    <div >
 
       <h1 className="titlePost">Post</h1>
       <div className="post-main">
@@ -131,10 +131,10 @@ export function PostDetails() {
           </button>
         </div>
 
-        <span className="post-author">@{post.User?.username || "Anonyme"}</span>
+        <span className="postdetail-author">@{post.User?.username || "Anonyme"}</span>
         <p className="post-details-title">{post.title || "Sans titre"}</p>
         <p className="post-details-content">{post.content}</p>
-        <div className="post-meta">
+        <div>
           <span className="post-date">
             <DateDisplay date={post.createdAt} />
           </span>
@@ -147,10 +147,10 @@ export function PostDetails() {
           <i className="fa-solid fa-message" style={{ color: "#ffffff" }}></i>{" "}
         </h3>
 
-        <div className="comments-list">
+        <div>
           {comments.length === 0 ? (
             <>
-              <p className="no-comments">Aucun commentaire</p>
+              <p>Aucun commentaire</p>
               <form className="comment-form" onSubmit={handleSubmitComment}>
                 <textarea
                   className="comment-input"
@@ -214,7 +214,7 @@ export function PostDetails() {
                     </button>
                   </div>
                   <p className="comment-content">{comment.content}</p>
-                  <span className="comment-date">
+                  <span>
                     <DateDisplay date={comment.createdAt} />
                   </span>
                 </div>

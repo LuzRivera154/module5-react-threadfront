@@ -22,11 +22,11 @@
     display: flex;
     justify-content: start;
     margin: 35px;
+}  
 
-}
-
-span.post-author {
+.post-author {
     display: flex;
+    margin: 20px;
 }
 
 .comments-section {
@@ -36,12 +36,17 @@ span.post-author {
 
 .titlePost {
     color: white;
-    line-height: 30px;
     font-size: 45px;
     border-left: 4px solid white;
-    padding-left: 10px;
     display: flex;
     margin-left: 110px;
+    margin: 30px;
+    line-height: 64px;
+    height: 45px;
+}
+
+.postdetail-author{
+    display: flex;
 
 }
 
@@ -65,7 +70,6 @@ span.post-author {
     gap: 10px;
 
 }
-
 
 .comment-author {
     font-weight: 600;
@@ -94,7 +98,7 @@ span.post-author {
     margin: 0;
 }
 
-form.comment-form{
+.comment-form{
     display: flex ;
     justify-content: left;
 }
@@ -105,7 +109,7 @@ h3.comments-title {
     gap: 5px;
 }
 
-textarea.comment-input {
+.comment-input {
     display: flex;
     border: none;
     background: transparent;
@@ -134,12 +138,13 @@ textarea.comment-input {
     cursor: pointer;
 }
 
-button.comment-submit-button {
+.comment-submit-button {
     width: 30px;
     height: 30px;
-    background: transparent;
-    justify-content: right;
-
+    background: none;
+    display: flex;
+    border-radius: 45px;
+    align-items: center;
 }
 
 .icons-postdetail {
@@ -151,7 +156,7 @@ button.comment-submit-button {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 12px 0;
-    background-color: #000000d2;
+    background-color: #110e0ec2;
     border-top: 1px solid #000000;
     z-index: 1000;
 }

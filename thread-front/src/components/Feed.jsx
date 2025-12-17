@@ -1,12 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./Home.css";
+import { DateDisplay } from "./DateDisplay";
+import "./Feed.css";
 
 export function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState("");
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    console.log(storedUserId);
+
+    if (storedUserId) {
+      setUser(Number(storedUserId));
+    }
+  }, []);
+
+
 
   useEffect(() => {
     fetchPosts();
@@ -17,11 +31,11 @@ export function Feed() {
       const response = await fetch("http://localhost:3000/posts", {
         credentials: "include",
       });
-      
+
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des posts");
       }
-      
+
       const data = await response.json();
       setPosts(data);
     } catch (err) {
@@ -50,15 +64,12 @@ export function Feed() {
   if (error) return <div>Erreur: {error}</div>;
 
   return (
-    <div className="home-container">
-      <header className="home-header">
-        <h1 className="home-title">Thread</h1>
-        <button className="logout-button" onClick={handleLogout}>
-          Déconnexion
-        </button>
+    <div className="feed-container">
+      <header>
+        <h1 className="feed-title">Feed</h1>
       </header>
 
-      <div className="posts-container">
+      <div className="feed-containers">
         {posts.length === 0 ? (
           <p className="no-posts">Aucun post pour le moment</p>
         ) : (
@@ -68,17 +79,12 @@ export function Feed() {
               className="post-card"
               onClick={() => handlePostClick(post.id)}
             >
-              <div className="post-header">
-                <h3 className="post-title">{post.title || "Sans titre"}</h3>
+              <div>
+                <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
+                <h3 className="post-feed">{post.title || "Sans titre"}</h3>
+                <p className="feed-contents">{post.content}</p>
                 <span className="post-date">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-              <p className="post-content">{post.content}</p>
-              <div className="post-footer">
-                <span className="comments-count">
-                  <i className="fa-regular fa-comment"></i>
-                  {post.Commentaires?.length || 0}
+                  <DateDisplay date={post.createdAt} />
                 </span>
               </div>
             </div>
@@ -86,12 +92,10 @@ export function Feed() {
         )}
       </div>
 
-      <button
-        className="new-post-button"
-        onClick={() => navigate("/createPost")}
-      >
-        <i className="fa-solid fa-plus"></i> Nouveau post
-      </button>
+      <div className="icons-postdetail">
+        <i className="fa-solid fa-circle-plus" style={{ color: '#ffffff' }} onClick={() => navigate('/createPost')}  ></i>
+        <i className="fa-solid fa-circle-user" onClick={() => navigate(`/profile/${user}`)}></i>
+      </div>
     </div>
   );
 }

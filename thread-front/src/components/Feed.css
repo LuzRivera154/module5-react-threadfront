@@ -1,0 +1,55 @@
+.feed-title{
+    display: flex;
+    border-left: 2px solid white;
+    line-height: 56px;
+    height: 40px;
+    font-size: 50px;
+    margin: 30px;
+}
+
+.post-card {
+    background: linear-gradient(90deg, rgba(0, 0, 5, 1) 0%, rgba(71, 69, 69, 1) 90%, rgba(117, 117, 117, 1) 100%);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 24px;
+    margin: 30px;
+    position: relative;
+}
+
+.post-date {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 10px;
+    color: gray;
+}
+
+
+.post-feed{
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+    font-size: 15px;
+}
+
+.feed-contents{
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+    padding-bottom: 25px;
+}
+
+.feed-container{
+    height: 800px;
+    overflow-y: auto;
+}
+
+.feed-author{
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+    font-size: 25px;
+
+}
+
+
