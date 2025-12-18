@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay";
-import "./PostDetails.css";
+import "../css/PostDetails.css";
 
 export function PostDetails() {
   const { postId } = useParams();

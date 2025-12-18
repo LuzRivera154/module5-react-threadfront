@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay.jsx";
-import "./CreatePost.css";
+import "../css/CreatePost.css";
 
 export function CreatePost({ onPostCreated }) {
   const [content, setContent] = useState("");

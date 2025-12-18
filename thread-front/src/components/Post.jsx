@@ -1,5 +1,5 @@
 
-import "./Post.css"
+import "../css/Post.css"
 import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay";
 ///posts/:postId
