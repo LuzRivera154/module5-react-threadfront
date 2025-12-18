@@ -1,0 +1,107 @@
+.create-post {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 37px;
+  padding: 20px;
+  padding-bottom: 70px;
+}
+
+.post-content-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.feed-content {
+  height: 171px;
+  border-radius: 9px;
+  color: white;
+  font-size: 10px;
+  line-height: 1.5;
+  background-color: #0d0d0d;
+  border: none;
+  padding: 15px 10px 35px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.date-preview {
+  display: flex;
+  padding-left: 10px;
+  color: gray;
+  font-size: 10px;
+  margin: 0;
+  position: relative;
+  top: -31px;
+}
+
+.post-title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  margin: 20px 0 0 0;
+  letter-spacing: 3px;
+  outline: none;
+}
+
+.post-title {
+  border-left: 3px solid white;
+  color: white;
+  padding-left: 7px;
+  margin-left: 3px;
+  font-size: 47px;
+  line-height: 48px;
+  height: 37px;
+  margin-top: 15px;
+  display: flex;
+}
+
+.error-message {
+  color: red;
+}
+
+.post-button {
+  width: 53%;
+  height: 53px;
+  margin-left: 0;
+  border-radius: 16px;
+  font-size: 19px;
+  font-weight: bolder;
+}
+
+.icons-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    align-items: center;
+    padding: 12px 0;
+    background-color: transparent;
+    
+    z-index: 1000;
+}
+
+.icons-container i {
+  color: white;
+  font-size: 41px;
+  cursor: pointer;
+}
+
+
+.icon-profile {
+  grid-column: 2;
+  justify-self: center; 
+}
+
+
+.icon-feed {
+  grid-column: 3;
+  justify-self: end; 
+  padding-right: 25px; 
+}
+

@@ -1,0 +1,77 @@
+.icon-footer {
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.div-container-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.icon-footer:hover {
+    color: rgba(255, 255, 255, 0.726);
+}
+
+.messenger {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.footer-profile {
+    position: fixed;
+    bottom: 1.5rem;
+    width: 100%;
+}
+
+.div-footer-profile {
+    display: flex;
+    justify-content: space-around;
+}
+
+.title-profile {
+    display: flex;
+    font-size: 3rem;
+    margin: .5rem 0;
+    font-family: sans-serif;
+    border-left: 3px solid white;
+    line-height: 2.5rem;
+    height: 2.5rem;
+    padding: 0 .3rem;
+
+}
+
+.username-profile {
+    font-size: 1.7rem;
+    font-weight: bold;
+    display: flex;
+    margin: 0;
+}
+
+.container-icon-count {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.number-span-profile {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    padding: 3px 0;
+}
+
+.div-container-btn-logout {
+    padding: 1rem;
+}
+
+.exit {
+    color: rgb(255, 19, 19);
+    font-size: 2rem;
+}
+
+.div-container-title-btn-profile {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,46 @@
+.container-register {
+  display: flex;
+  justify-content: flex-start;
+  color: aliceblue;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.create {
+  font-size: 45px;
+  margin: 80px;
+  border-left: 4px solid white;
+  display: flex;
+  padding: 4px;
+  margin: 4rem 3rem 2rem 3rem;
+}
+
+.formulaire {
+  width: 250px;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputP {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  margin: 20px;
+  letter-spacing: 3px;
+  outline: none;
+}
+
+.buttonSub {
+  width: 200px;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 14px;
+  margin: 20px auto;
+  background: white;
+  color: black;
+  cursor: pointer;
+}
+
