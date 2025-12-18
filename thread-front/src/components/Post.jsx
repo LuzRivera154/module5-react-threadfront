@@ -44,6 +44,7 @@ export function Post({ post }) {
                 <p className="p-content-post">{post.content}</p>
             </div>
             <span className='date-display-post'>
+                
             <DateDisplay  date={post.createdAt} />
             </span>
         </div>
