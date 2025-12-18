@@ -1,6 +1,6 @@
 
 import "./Post.css"
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay";
 ///posts/:postId
 
@@ -21,11 +21,14 @@ export function Post({ post }) {
             console.error("Erreur lors de la suppression du post:", err);
         }
     };
+    const handlePostClick = (postId) => {
+        navigate(`/post/${postId}`);
+    };
 
 
     if (!post) return <div>Post non trouvé</div>;
     return (
-        <div className="div-container-post">
+        <div className="div-container-post" onClick={() => handlePostClick(post.id)}>
             <div className="div-container-subtitle-post">
                 <p className="post-publie">Post publié par :
                     <span className="btn-profile-post" onClick={() => navigate(`/profile/${post.User.id}`)}>
@@ -40,7 +43,9 @@ export function Post({ post }) {
                 <h4 className="h4-title-post">{post.title}</h4>
                 <p className="p-content-post">{post.content}</p>
             </div>
-            <DateDisplay date={post.createdAt} />
+            <span className='date-display-post'>
+            <DateDisplay  date={post.createdAt} />
+            </span>
         </div>
     )
 }
