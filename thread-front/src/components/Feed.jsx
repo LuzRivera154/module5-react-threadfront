@@ -66,8 +66,8 @@ export function Feed() {
         dataLength={posts.length} // poner una funcion que cuente cuantos posts hay
         next={()=>setPage(prev => prev + 1)}
         hasMore={hasMore}
-        loader={<h4>Chargement...</h4>}
-        endMessage={<p className="p-endmessage">Aucun post pour le moment</p>}
+        loader={<h4 className="text-align">Chargement...</h4>}
+        endMessage={<p className="text-align">final</p>}
         height={700}
       >
         <div className="feed-containers">

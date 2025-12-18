@@ -38,7 +38,7 @@ async function main() {
               .status(401)
               .json({ message: "Accès refusé : utilisateur non trouvé" });
           }
-          
+
           next();
         } catch (error) {
           console.error("Erreur token JWT:", error.message);
@@ -50,7 +50,7 @@ async function main() {
     }
 
     const app = express();
-    
+
     // Configuration CORS
     app.use(
       cors({
@@ -60,7 +60,7 @@ async function main() {
         allowedHeaders: ["Content-Type", "Authorization"],
       })
     );
-    
+
     app.use(express.json());
     app.use(cookieParser());
 
@@ -127,7 +127,7 @@ async function main() {
           email,
           password: password, // Mot de passe en clair, le modèle le hash
         });
-        
+
         console.log("Utilisateur créé:", user.id, user.username);
 
         // Réponse succès
@@ -137,7 +137,7 @@ async function main() {
           userId: user.id,
           username: user.username,
         });
-        
+
       } catch (error) {
         console.error("ERREUR /register :", error.message);
         console.error("Détails:", error);
@@ -152,7 +152,7 @@ async function main() {
     app.post("/login", async (request, response) => {
       try {
         const { email, password } = request.body;
-        
+
         console.log("Tentative de login pour:", email);
 
         // 1. Vérifier que les champs sont fournis
@@ -198,7 +198,7 @@ async function main() {
         });
 
         console.log("Login réussi pour:", user.email);
-        
+
         // 7. Réponse succès
         response.json({
           message: "Connexion réussie",
@@ -220,13 +220,13 @@ async function main() {
       try {
         const newPostData = request.body;
         console.log("Création de post par:", request.user.username);
-        
+
         const newPost = await Post.create({
           title: newPostData.title || "Sans titre",
           content: newPostData.content,
           UserId: request.user.id,
         });
-        
+
         console.log("Post créé:", newPost.id);
         return response.json(newPost);
       } catch (error) {
@@ -239,20 +239,27 @@ async function main() {
 
     // Route GET /posts : récupération de tous les posts
     app.get("/posts", async (request, response) => {
+      const page = parseInt(request.query.page) || 1;
+      const limit = parseInt(request.query.limit) || 10;
+      const offset = (page - 1) * limit;
       try {
         const posts = await Post.findAll({
+          limit,
+          offset,
           include: [{
             model: User,
             attributes: ['id', 'username']
           }],
           order: [['createdAt', 'DESC']]
         });
-        
-        if (posts.length === 0) {
-          return response.json({ message: "No posts available at the moment" });
-        }
-        
-        response.json(posts);
+
+
+        const total = await Post.count();
+
+        response.json({
+          posts,
+          hasMore: offset + posts.length < total,
+        });
       } catch (error) {
         console.error("Erreur récupération posts:", error);
         response.status(500).json({
@@ -280,11 +287,11 @@ async function main() {
             }
           ]
         });
-        
+
         if (!post) {
           return response.status(404).json({ error: "Post non trouvé" });
         }
-        
+
         return response.json(post);
       } catch (error) {
         console.error("Erreur récupération post:", error);
@@ -299,18 +306,18 @@ async function main() {
       try {
         const commentairesData = request.body;
         const postsId = request.params.postId;
-        
+
         const post = await Post.findByPk(postsId);
         if (!post) {
           return response.status(404).json({ error: "Post non trouvé" });
         }
-        
+
         const newCommentaire = await Commentaires.create({
           content: commentairesData.content,
           PostId: postsId,
           UserId: request.userId,
         });
-        
+
         // Récupérer le commentaire avec l'utilisateur
         const commentWithUser = await Commentaires.findByPk(newCommentaire.id, {
           include: [{
@@ -318,7 +325,7 @@ async function main() {
             attributes: ['id', 'username']
           }]
         });
-        
+
         console.log("Commentaire créé par:", request.user.username);
         return response.json(commentWithUser);
       } catch (error) {
@@ -333,16 +340,16 @@ async function main() {
     app.get("/users/:userId/profile", async (request, response) => {
       try {
         const userId = request.params.userId;
-        
+
         // Récupérer l'utilisateur
         const user = await User.findByPk(userId, {
           attributes: ['id', 'username', 'email', 'createdAt']
         });
-        
+
         if (!user) {
           return response.status(404).json({ error: "Utilisateur non trouvé" });
         }
-        
+
         // Récupérer les posts de l'utilisateur
         const posts = await Post.findAll({
           where: { UserId: userId },
@@ -370,15 +377,15 @@ async function main() {
       try {
         const commentairesId = request.params.commentairesId;
         const commentaire = await Commentaires.findByPk(commentairesId);
-        
+
         if (!commentaire) {
           return response.status(404).json({ error: "Commentaire non trouvé" });
         }
-        
+
         if (commentaire.UserId != request.user.id) {
           return response.status(403).json({ error: "Accès refusé" });
         }
-        
+
         await commentaire.destroy();
         console.log("Commentaire supprimé:", commentairesId);
         response.json({ message: "Commentaire supprimé avec succès" });
