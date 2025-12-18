@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { Login } from "./components/Login.jsx";
-import { Register } from "./components/Register.jsx";
-import { Feed } from "./components/Feed.jsx";
+import { Login } from "./pages/Login.jsx";
+import { Register } from "./pages/Register.jsx";
+import { Feed } from "./pages/Feed.jsx";
 import { CreatePost } from "./components/CreatePost.jsx";
 import { PostDetails } from "./components/PostDetails.jsx";
-import { Profile } from "./components/Profile.jsx";
+import { Profile } from "./pages/Profile.jsx";
 
 function App() {
   return (

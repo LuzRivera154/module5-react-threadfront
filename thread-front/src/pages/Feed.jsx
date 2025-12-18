@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { DateDisplay } from "./DateDisplay";
+import { DateDisplay } from "../components/DateDisplay";
 import InfiniteScroll from "react-infinite-scroll-component";
-import "./Feed.css";
+import "../css/Feed.css";
 
 export function Feed() {
   const [posts, setPosts] = useState([]);
