@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DateDisplay } from "./DateDisplay";
+import InfiniteScroll from "react-infinite-scroll-component";
 import "./Feed.css";
 
 export function Feed() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
 
@@ -20,15 +22,15 @@ export function Feed() {
     }
   }, []);
 
-
-
-  useEffect(() => {
+  useEffect(()=>{
+    console.log("Effect page")
     fetchPosts();
-  }, []);
+
+  },[page])
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/posts", {
+      const response = await fetch(`http://localhost:3000/posts?page=${page}&limit=10`, {
         credentials: "include",
       });
 
@@ -37,22 +39,12 @@ export function Feed() {
       }
 
       const data = await response.json();
-      setPosts(data);
+
+      setPosts((prev) => [...prev, ...data.posts]);
+      setHasMore(data.hasMore);
+
     } catch (err) {
       setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await fetch("http://localhost:3000/logout", {
-        credentials: "include",
-      });
-      navigate("/login");
-    } catch (err) {
-      console.error("Erreur lors de la déconnexion:", err);
     }
   };
 
@@ -60,7 +52,7 @@ export function Feed() {
     navigate(`/post/${postId}`);
   };
 
-  if (loading) return <div>Chargement...</div>;
+
   if (error) return <div>Erreur: {error}</div>;
 
   return (
@@ -69,33 +61,43 @@ export function Feed() {
         <h1 className="feed-title">Feed</h1>
       </header>
 
-      <div>
-        {posts.length === 0 ? (
-          <p>Aucun post pour le moment</p>
-        ) : (
-          posts.map((post) => (
-            <div
-              key={post.id}
-              className="post-card"
-              onClick={() => handlePostClick(post.id)}
-            >
-              <div>
-                <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
-                <h3 className="post-feed">{post.title || "Sans titre"}</h3>
-                <p className="feed-contents">{post.content}</p>
-                <span className="feed-date">
-                  <DateDisplay date={post.createdAt} />
-                </span>
+
+      <InfiniteScroll
+        dataLength={posts.length} // poner una funcion que cuente cuantos posts hay
+        next={()=>setPage(prev => prev + 1)}
+        hasMore={hasMore}
+        loader={<h4>Chargement...</h4>}
+        endMessage={<p className="p-endmessage">Aucun post pour le moment</p>}
+        height={700}
+      >
+        <div className="feed-containers">
+          {posts.length === 0 ? (
+            <p className="no-posts">Aucun post pour le moment</p>
+          ) : (
+            posts.map((post, index) => (
+              <div
+                key={`${post.id}-${index}`}
+                className="post-card"
+                onClick={() => handlePostClick(post.id)}
+              >
+                <div>
+                  <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
+                  <h3 className="post-feed">{post.title || "Sans titre"}</h3>
+                  <p className="feed-contents">{post.content}</p>
+                  <span className="post-date">
+                    <DateDisplay date={post.createdAt} />
+                  </span>
+                </div>
               </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
+      </InfiniteScroll>
 
       <div className="icons-postdetail">
         <i className="fa-solid fa-circle-plus" style={{ color: '#ffffff' }} onClick={() => navigate('/createPost')}  ></i>
         <i className="fa-solid fa-circle-user" onClick={() => navigate(`/profile/${user}`)}></i>
       </div>
-    </div>
+    </div >
   );
 }
