@@ -44,6 +44,7 @@
 .postdetail-author {
     display: flex;
     color: rgb(130, 255, 58);
+    font-size: 20px;
 }
 
 .comment-card {
@@ -102,6 +103,7 @@
     display: flex;
     color: gray;
     font-size: 10px;
+    padding-left: 2px;
     z-index: 1;
     margin: 0;
 }

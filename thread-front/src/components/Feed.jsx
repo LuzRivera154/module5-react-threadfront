@@ -70,9 +70,9 @@ export function Feed() {
         endMessage={<p className="text-align">final</p>}
         height={700}
       >
-        <div className="feed-containers">
+        <div >
           {posts.length === 0 ? (
-            <p className="no-posts">Aucun post pour le moment</p>
+            <p >Aucun post pour le moment</p>
           ) : (
             posts.map((post, index) => (
               <div
@@ -84,7 +84,7 @@ export function Feed() {
                   <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
                   <h3 className="post-feed">{post.title || "Sans titre"}</h3>
                   <p className="feed-contents">{post.content}</p>
-                  <span className="post-date">
+                  <span className="feed-date">
                     <DateDisplay date={post.createdAt} />
                   </span>
                 </div>

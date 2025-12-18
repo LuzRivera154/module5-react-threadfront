@@ -25,6 +25,7 @@
     color: gray;
 }
 
+
 .post-feed{
     display: flex;
     justify-content: left;
@@ -47,15 +48,11 @@
 .feed-author{
     display: flex;
     justify-content: left;
+    color: greenyellow;
     margin: 20px;
-    font-size: 25px;
-
+    font-size: 20px;
 }
 
-
-.p-endmessage{
-    text-align: center;
-}
 .text-align{
     text-align: center;
 }
