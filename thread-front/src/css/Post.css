@@ -10,14 +10,14 @@
 }
 
 .h4-title-post {
-    font-size: .8rem;
-    text-align: center;
+    font-size: 1rem;
+
 }
 
 .p-content-post {
-    font-size: .7rem;
-    padding: 1rem;
-    text-align: center;
+    font-size: .9rem;
+    padding: .5rem 0;
+
 }
 
 .post-publie {
