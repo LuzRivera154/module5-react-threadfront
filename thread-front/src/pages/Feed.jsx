@@ -22,11 +22,11 @@ export function Feed() {
     }
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("Effect page")
     fetchPosts();
 
-  },[page])
+  }, [page])
 
   const fetchPosts = async () => {
     try {
@@ -51,7 +51,20 @@ export function Feed() {
   const handlePostClick = (postId) => {
     navigate(`/post/${postId}`);
   };
-
+  const handleDeletePost = async (postId) => {
+    if (!window.confirm("Supprimer ce post ?")) return;
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if (response.ok) {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.error("Erreur lors de la suppression du post:", err);
+    }
+  };
 
   if (error) return <div>Erreur: {error}</div>;
 
@@ -63,8 +76,8 @@ export function Feed() {
 
 
       <InfiniteScroll
-        dataLength={posts.length} // poner una funcion que cuente cuantos posts hay
-        next={()=>setPage(prev => prev + 1)}
+        dataLength={posts.length}
+        next={() => setPage(prev => prev + 1)}
         hasMore={hasMore}
         loader={<h4 className="text-align">Chargement...</h4>}
         endMessage={<p className="text-align">final</p>}
@@ -78,11 +91,15 @@ export function Feed() {
               <div
                 key={`${post.id}-${index}`}
                 className="post-card"
-                onClick={() => handlePostClick(post.id)}
               >
                 <div>
-                  <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
-                  <h3 className="post-feed">{post.title || "Sans titre"}</h3>
+                  <div className="content-title-btn-feed">
+                    <span className="feed-author">@{post.User?.username || "Anonyme"}</span>
+                    <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)} >
+                      <i class="fa-solid fa-xmark delete-icon"></i>
+                    </button>
+                  </div>
+                  <h3 onClick={() => handlePostClick(post.id)} className="post-feed">{post.title || "Sans titre"}  </h3>
                   <p className="feed-contents">{post.content}</p>
                   <span className="feed-date">
                     <DateDisplay date={post.createdAt} />
