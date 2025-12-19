@@ -28,7 +28,7 @@ export function Post({ post }) {
 
     if (!post) return <div>Post non trouvé</div>;
     return (
-        <div className="div-container-post" onClick={() => handlePostClick(post.id)}>
+        <div className="div-container-post">
             <div className="div-container-subtitle-post">
                 <p className="post-publie">Post publié par :
                     <span className="btn-profile-post" onClick={() => navigate(`/profile/${post.User.id}`)}>
@@ -40,11 +40,12 @@ export function Post({ post }) {
                 </button>
             </div>
             <div>
-                <h4 className="h4-title-post">{post.title}</h4>
+                <h4 className="h4-title-post" onClick={() => handlePostClick(post.id)} >{post.title} </h4>
                 <p className="p-content-post">{post.content}</p>
             </div>
             <span className='date-display-post'>
-            <DateDisplay  date={post.createdAt} />
+
+                <DateDisplay date={post.createdAt} />
             </span>
         </div>
     )

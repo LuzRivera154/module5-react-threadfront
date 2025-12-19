@@ -10,14 +10,14 @@
 }
 
 .h4-title-post {
-    font-size: .8rem;
-    text-align: center;
+    font-size: 1rem;
+
 }
 
 .p-content-post {
-    font-size: .7rem;
-    padding: 1rem;
-    text-align: center;
+    font-size: .9rem;
+    padding: .5rem 0;
+
 }
 
 .post-publie {
@@ -32,6 +32,8 @@
 .delete-post-btn {
     height: 1.5rem;
     width: 1.5rem;
+    margin-top: .5rem;
+    margin-right: .5rem;
 }
 
 .btn-profile-post {
@@ -49,7 +51,11 @@
     padding: .5rem 0;
 
 }
-.date-display-post{
+
+.date-display-post {
     font-size: .7rem;
 }
-
+.content-title-btn-feed{
+    display: flex;
+    justify-content: space-between
+}
