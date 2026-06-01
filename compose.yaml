@@ -1,0 +1,26 @@
+services:  # lista de contenedores que vas a levantar
+  web:    # nombre del contenedor
+    build: ./thread-front  # construye la imagen usando el Dockerfile de esa carpeta
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+  api:    # contenedor del backend Express
+    build: ./back
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: bdd
+      DATABASE_NAME: threadapi-database
+      DATABASE_USER: root
+      DATABASE_PASS: root
+      PORT: 3000
+    depends_on:
+      - bdd
+
+  bdd:     # contenedor de la base de datos
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: threadapi-database
+      MYSQL_ROOT_PASSWORD: root
